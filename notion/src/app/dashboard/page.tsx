@@ -2,9 +2,12 @@
 import React from 'react';
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, PlusIcon } from "lucide-react";
 import { UserButton } from '@clerk/nextjs';
 import { Separator } from '@radix-ui/react-separator';
+import CreateDialog from '@/components/ui/CreateDialog';
+import { log } from 'console';
+import { Dialog } from '@radix-ui/react-dialog';
 
 type Props = {}
 
@@ -32,6 +35,10 @@ const DashboardPage = (props: Props) => {
                 <div className="h-8"></div>
                 <div className="text-center">
                     <h2 className='text-xl text-gray-600'>No folders created yet</h2>
+                </div>
+                <div className='grid sm:grid-cols-3 md:grid-cols-5 grid-cols-1 gap-3'>
+                    {/* <Link href='/dashboard'></Link> */}
+                    <CreateDialog></CreateDialog>
                 </div>
             </div>
         </div>
