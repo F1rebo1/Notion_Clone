@@ -1,11 +1,15 @@
 'use client'
 import React from 'react';
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 import { Plus } from 'lucide-react';
-import { Dialog, DialogContent, DialogHeader, DialogTrigger, DialogTitle } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTrigger, DialogTitle, DialogFooter, DialogClose } from '@/components/ui/dialog';
+import { DialogDescription } from '@radix-ui/react-dialog';
 
 type Props = {}
 
 const CreateDialog = (props : Props) => {
+    const [input, setInput] = React.useState('');
     return(
         <Dialog>
             <DialogTrigger>
@@ -18,12 +22,32 @@ const CreateDialog = (props : Props) => {
             </DialogTrigger>
             <DialogContent>
                 <DialogHeader >
-                    <DialogTitle>
-                    Popup Title
-                    </DialogTitle>
+                    <DialogTitle>Popup Title</DialogTitle>
+                    <DialogDescription>
+                        Description!
+                    </DialogDescription>
                 </DialogHeader>
-                Description!
+                <form>
+                    <Input value={input} onChange={e => setInput(e.target.value)} placeholder="Name..." />
+                    <div className="h-4"></div>
+                    <div className="flex items-center gap-2">
+                        <Button type="submit" className='bg-lime-300 hover:shadow-sm transition hover:-translate-y-1 hover:bg-teal-700' variant="secondary">
+                            Submit
+                        </Button>
+                        <Button type="reset" className='bg-pink-200 hover:shadow-sm transition hover:-translate-y-1 hover:bg-red-600' variant="secondary">
+                            Cancel
+                        </Button>
+                    </div>
+                </form>
+                {/* <DialogFooter className="sm:justify-start">
+                    <DialogClose asChild>
+                        <Button className='bg-pink-200 hover:shadow-sm transition hover:-translate-y-1 hover:bg-red-600' type="button" variant="secondary">
+                        Cancel
+                        </Button>
+                    </DialogClose>
+                </DialogFooter> */}
             </DialogContent>
+            
         </Dialog>
     );
 }
