@@ -2,14 +2,30 @@
 import React from 'react';
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Plus } from 'lucide-react';
+import { Axis3DIcon, Plus } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTrigger, DialogTitle, DialogFooter, DialogClose } from '@/components/ui/dialog';
 import { DialogDescription } from '@radix-ui/react-dialog';
+import { useMutation } from '@tanstack/react-query';
+import { generateImagePrompt } from '@/lib/openai';
+import axios from 'axios';
 
 type Props = {}
 
 const CreateDialog = (props : Props) => {
     const [input, setInput] = React.useState('');
+    const createNotebook = useMutation({
+        mutationFn: async() => {
+            const response = await axios.post('/api/createNotebook', {
+                name: input
+            });
+            return response.data;
+        }
+    });
+
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault;
+    }
+
     return(
         <Dialog>
             <DialogTrigger>
@@ -27,7 +43,7 @@ const CreateDialog = (props : Props) => {
                         Description!
                     </DialogDescription>
                 </DialogHeader>
-                <form>
+                <form onSubmit={handleSubmit}>
                     <Input value={input} onChange={e => setInput(e.target.value)} placeholder="Name..." />
                     <div className="h-4"></div>
                     <div className="flex items-center gap-2">
